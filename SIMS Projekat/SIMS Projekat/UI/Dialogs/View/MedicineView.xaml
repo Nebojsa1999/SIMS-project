@@ -1,0 +1,315 @@
+﻿<Window x:Class="SIMS_Projekat.UI.Dialogs.View.MedicineView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIMS_Projekat.UI.Dialogs.View"
+        xmlns:converters="clr-namespace:SIMS_Projekat.CompositeCommon.Converters"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        mc:Ignorable="d"
+        Title="MedicineView"
+    WindowState="Maximized"
+    WindowStyle="None" Width="1365.3">
+    <Window.Resources>
+        <converters:DialogStateToBoolConverter x:Key="DialogStateToBoolConverter" />
+    </Window.Resources>
+    <xcad:DockingManager>
+
+        <xcad:DockingManager.Theme>
+            <xcad:AeroTheme />
+        </xcad:DockingManager.Theme>
+
+        <xcad:LayoutRoot>
+            <xcad:LayoutPanel Orientation="Vertical">
+                <xcad:LayoutAnchorablePane DockWidth="200">
+                    <xcad:LayoutAnchorable ContentId="properties" Title="Data" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+
+                                <RowDefinition Height="*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Height="100">
+                                <StackPanel Height="100" Width="100" Orientation="Vertical">
+                                    <TextBox x:Name="textID" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding IDInMedicine, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button Content="Search by ID" Margin="10" Command="{Binding SearchByID}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textID, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Height="100" Width="107" Orientation="Vertical">
+                                    <TextBox x:Name="textName" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding NameInMedicine, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button  Content="Search by name" Margin="10" Command="{Binding SearchByName}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textName, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Height="100" Width="120" Orientation="Vertical">
+                                    <TextBox x:Name="textAmount" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding AmountInMedicine, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button Content="Search by amount" Margin="10" Command="{Binding SearchByAmount}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textAmount, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Height="100" Width="130" Orientation="Vertical">
+                                    <TextBox x:Name="textProducer" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding ProducerInMedicine, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button Content="Search by producer" Margin="10" Command="{Binding SearchByProducer}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textProducer, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="From price: " Height="24"/>
+                                        <TextBox x:Name="textPrice" Width="30" Height="30" Margin="5" Text="{Binding PriceFrom, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="To  price: "/>
+                                        <TextBox x:Name="textPrice2" Width="30" Height="30" Margin="5" Grid.Column="0" Grid.Row="0" Text="{Binding PriceTo, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <Button Width="130" Content="Search by price" Command="{Binding SearchByPriceCommand}" Margin="0,0,0,66">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textPrice, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=textPrice2, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,12,0,13">
+                                    <TextBox x:Name="textIngredient" Width="106" Height="30" Margin="5" Grid.Column="0" Grid.Row="0" Text="{Binding IngredientInMedicine, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="-29.7,0.793"/>
+                                    <Button Width="130" Content="Search by ingredient" Command="{Binding SearchByIngredient}" >
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textIngredient, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Width="178" Orientation="Vertical" Margin="0,0,0,-21">
+                                    <Button Content="Sort by amount" Margin="10" Command="{Binding SortByAmountCommand}">
+
+                                    </Button>
+                                    <Button Content="Sort by name" Margin="10" Command="{Binding SortByNameCommand}">
+
+                                    </Button>
+                                    <Button Content="Sort by price" Margin="10" Command="{Binding SortByPriceCommand}">
+
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+                            <StackPanel  Orientation="Horizontal" Width="258" Margin="914,-10,185.6,10" >
+                                <ComboBox  Width="112" SelectedValue="{Binding SelectedIngredient, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding IngredientsCombo}" DisplayMemberPath="Name" SelectedValuePath="Value" Height="30"/>
+                                <TextBox Text="{Binding Quantity}"   Height="30" Width="111"/>
+                                <Button Content="Dodaj" Command="{Binding AddIngredient}" Height="30"/>
+
+                            </StackPanel>
+
+                            <Grid Grid.Column="0" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <DataGrid  Grid.Column="0"  IsEnabled="{Binding DataGridEnabled}" SelectionMode="Single" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto"
+                                        SelectedItem="{Binding SelectedItem}" Height="Auto" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" Grid.ColumnSpan="2" Margin="0,10,367.6,-0.2">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Producer" Binding="{Binding Producer, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Cost" Binding="{Binding Cost, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Accepted" Binding="{Binding Accepted, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Deleted" Binding="{Binding Deleted, Mode=OneWay}"/>
+                                        <DataGridTextColumn Header="Reason" Binding="{Binding Reason, Mode=OneWay}"/>
+
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                                <Grid Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="307*"/>
+                                        <ColumnDefinition Width="89*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <DataGrid  SelectionMode="Single" ItemsSource="{Binding MedicamentIngredient, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto" Margin="310,10,0.4,-0.2" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                        SelectedItem="{Binding SelectedItem}" Height="Auto" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}"/>
+                                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, Mode=OneWay}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </Grid>
+
+
+                        </Grid>
+
+                    </xcad:LayoutAnchorable>
+                </xcad:LayoutAnchorablePane>
+                <xcad:LayoutAnchorablePane DockWidth="200">
+                    <xcad:LayoutAnchorable ContentId="properties" Title="Controls" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Column="0" Grid.Row="0" IsEnabled="{Binding DialogState, Converter={StaticResource DialogStateToBoolConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+
+
+                                <Label Grid.Column="0" Grid.Row="2" Content="Name: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="2" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="3" Content="Producer: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Producer, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="3" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="4" Content="Cost: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="4" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="5" Content="Amount: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Amount, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="5" Width="200"/>
+
+                            </Grid>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="10" Visibility="{Binding IsUserOrDoctor}">
+                                <Button Grid.Column="0" Grid.Row="1" Content="Create" Command="{Binding AddCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="2" Content="Change" Command="{Binding EditCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="3" Content="Delete" Command="{Binding DeleteCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="4" IsDefault="True" Content="Ok" Command="{Binding OkCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="5" IsCancel="True" Content="Cancel" Command="{Binding CancelCommand}" Margin="10"/>
+                                <Label Content="Write medicine id:"  Grid.Column="0" Grid.Row="6"/>
+                                <TextBox x:Name="textIDMedicine" Text="{Binding IDMedicine}"  Grid.Column="0" Grid.Row="7" Margin="0,0,0,0.2" Width="54"/>
+                                <Button Content="Logical delete" Command="{Binding LogicDeleteCommand}"  Grid.Column="0" Grid.Row="8">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=textIDMedicine, Path=Text}" Value="">
+                                                    <Setter Property="Button.IsEnabled" Value="false" />
+                                                </DataTrigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                            <Button Height="30"  Content="Back" Margin="10,153,1292.6,9.6" Command="{Binding BackCommand}" />
+                            <StackPanel Height="40" Margin="278,10,736.6,131.6" Orientation="Horizontal" Visibility="{Binding OnlyDoctorStackPanel}">
+                                <Button Content="Accept" Command="{Binding AcceptCommand}"  Margin="10"></Button>
+                                <Button Content="Decline" Command="{Binding DeclineCommand}"  Margin="10">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=txtReason, Path=Text}" Value="">
+                                                    <Setter Property="Button.IsEnabled" Value="false" />
+                                                </DataTrigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Label Content="Reason:"></Label>
+                                <TextBox x:Name="txtReason" Text="{Binding Path=SelectedItem.Reason, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Margin="278,55,736.6,35.6" Visibility="{Binding PatientVisibility}">
+                                <Button Content="Buy" Command="{Binding BuyCommand}" />
+                            <Button Content="Confirm" Command="{Binding ConfirmCommand}"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </xcad:LayoutAnchorable>
+                </xcad:LayoutAnchorablePane>
+
+            </xcad:LayoutPanel>
+        </xcad:LayoutRoot>
+
+
+    </xcad:DockingManager>
+</Window>

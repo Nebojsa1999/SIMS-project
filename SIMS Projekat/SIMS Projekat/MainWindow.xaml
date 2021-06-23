@@ -1,0 +1,24 @@
+﻿<Window x:Class="SIMS_Projekat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIMS_Projekat"
+        mc:Ignorable="d"
+        xmlns:toolbar="clr-namespace:SIMS_Projekat.UI.Components.Toolbar.View"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Label x:Name="labelUsername" Content="Username:" HorizontalAlignment="Left" Margin="32,82,0,0" VerticalAlignment="Top" Height="35" Width="120"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="32,156,0,0" VerticalAlignment="Top" Height="25" Width="117"/>
+        <PasswordBox  Name="Password2" HorizontalAlignment="Left" Margin="32,181,0,0" VerticalAlignment="Top" Width="268" Height="29"/>
+        <TextBox  Name="Username" HorizontalAlignment="Left" Height="29" Margin="32,117,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="268"/>
+        <Button Margin="135,292,465.6,88" Background="#FF447EF3" Click="Button_Click">
+            <StackPanel   >
+                <TextBlock Text="Login" Foreground="White" FontWeight="Bold" Margin="2,0"></TextBlock>
+            </StackPanel>
+
+        </Button>
+        <CheckBox Margin="32,227,568.6,172" Name="CheckBox" Content="Save" />
+    </Grid>
+</Window>

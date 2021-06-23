@@ -1,0 +1,179 @@
+﻿<Window x:Class="SIMS_Projekat.UI.Dialogs.View.IngredientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIMS_Projekat.UI.Dialogs.View"
+        xmlns:converters="clr-namespace:SIMS_Projekat.CompositeCommon.Converters"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        mc:Ignorable="d"
+        Title="IngredientView" WindowState="Maximized"
+    WindowStyle="None">
+    <Window.Resources>
+        <converters:DialogStateToBoolConverter x:Key="DialogStateToBoolConverter" />
+    </Window.Resources>
+    <xcad:DockingManager>
+
+        <xcad:DockingManager.Theme>
+            <xcad:AeroTheme />
+        </xcad:DockingManager.Theme>
+
+        <xcad:LayoutRoot>
+            <xcad:LayoutPanel Orientation="Vertical">
+                <xcad:LayoutAnchorablePane DockWidth="200">
+                    <xcad:LayoutAnchorable ContentId="properties" Title="Data" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                                <StackPanel Height="100" Width="111" Orientation="Vertical">
+                                    <TextBox x:Name="textName" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding NameSearch, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button Content="Search by name" Margin="10" Command="{Binding SearchByNameCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textName, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Height="100" Width="149" Orientation="Vertical">
+                                    <TextBox x:Name="textDescription" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding DescriptionSearch, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button Content="Search by description" Margin="10" Command="{Binding SearchByDedcriptionCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textDescription, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Height="100" Width="149" Orientation="Vertical">
+                                    <TextBox x:Name="textMedicine" Height="30" TextWrapping="Wrap" Width="100"  Text="{Binding MedicineSearch, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                                    <Button Content="Search by medicine" Margin="10" Command="{Binding SearchByMedicineCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=textMedicine, Path=Text}" Value="">
+                                                        <Setter Property="Button.IsEnabled" Value="false" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel Height="100" Width="178" Orientation="Vertical">
+                                    <Button Content="Sort by medicine frequency" Margin="10" Command="{Binding SortIngredientsFrequencyCommand}">
+
+                                    </Button>
+                                    <Button Content="Sort by name" Margin="10" Command="{Binding SortByNameCommand}">
+
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                            <DataGrid x:Name="DataGrid" Grid.Column="0" Grid.Row="1" IsEnabled="{Binding DataGridEnabled}" SelectionMode="Single" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto"
+                                        SelectedItem="{Binding SelectedItem}" Height="Auto" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" HorizontalAlignment="Left" Margin="0,0,-177,-0.2" Width="960">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="iD" Binding="{Binding ID, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=OneWay}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Grid Grid.Column="1" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="20*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <DataGrid  SelectionMode="Single" ItemsSource="{Binding MedicamentIngredient, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto"  Grid.RowSpan="1"
+                                        SelectedValue="{Binding Frequency}" Height="Auto" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*" Grid.Column="1" Margin="197,0,0,-0.2">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Frequency" Binding="{Binding Frequency, Mode=OneWay}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+
+                        </Grid>
+
+                    </xcad:LayoutAnchorable>
+                </xcad:LayoutAnchorablePane>
+                <xcad:LayoutAnchorablePane DockWidth="200">
+                    <xcad:LayoutAnchorable ContentId="properties" Title="Controls" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Column="0" Grid.Row="0" IsEnabled="{Binding DialogState, Converter={StaticResource DialogStateToBoolConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+
+                                <Label Grid.Column="0" Grid.Row="1" Content="Name: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="1" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="2" Content="Description: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="2" Width="200"/>
+
+                            </Grid>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="10" Visibility="{Binding IsUserOrDoctor}">
+                                <Button Grid.Column="0" Grid.Row="1" Content="Create" Command="{Binding AddCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="2" Content="Change" Command="{Binding EditCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="3" Content="Delete" Command="{Binding DeleteCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="4" IsDefault="True" Content="Ok" Command="{Binding OkCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="5" IsCancel="True" Content="Cancel" Command="{Binding CancelCommand}" Margin="10"/>
+                            </StackPanel>
+                            <Button Height="30" Width="100" Grid.Column="0" Content="Back" Command="{Binding BackCommand}" Margin="0,82,661,75.6" />
+
+                        </Grid>
+
+                    </xcad:LayoutAnchorable>
+                </xcad:LayoutAnchorablePane>
+
+            </xcad:LayoutPanel>
+        </xcad:LayoutRoot>
+
+
+    </xcad:DockingManager>
+</Window>

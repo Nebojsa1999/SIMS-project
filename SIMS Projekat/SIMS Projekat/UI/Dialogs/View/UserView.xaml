@@ -1,0 +1,145 @@
+﻿<Window x:Class="SIMS_Projekat.UI.Dialogs.View.UserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SIMS_Projekat.UI.Dialogs.View"
+        xmlns:converters="clr-namespace:SIMS_Projekat.CompositeCommon.Converters"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        mc:Ignorable="d"
+        Title="UserView" WindowState="Maximized"
+    WindowStyle="None">
+    <Window.Resources>
+        <converters:DialogStateToBoolConverter x:Key="DialogStateToBoolConverter" />
+    </Window.Resources>
+    <xcad:DockingManager>
+
+        <xcad:DockingManager.Theme>
+            <xcad:AeroTheme />
+        </xcad:DockingManager.Theme>
+
+        <xcad:LayoutRoot>
+            <xcad:LayoutPanel Orientation="Vertical">
+                <xcad:LayoutAnchorablePane DockWidth="200">
+                    <xcad:LayoutAnchorable ContentId="properties" Title="Data" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                                <StackPanel Width="178" Orientation="Vertical" Margin="0,0,0,-0.4">
+                                    <Button Content="Sort by surname" Margin="10" Command="{Binding SortBySurnameCommand}">
+
+                                    </Button>
+                                    <Button Content="Sort by name" Margin="10" Command="{Binding SortByNameCommand}">
+
+                                    </Button>
+                                    
+                                </StackPanel>
+                            </StackPanel>
+
+                            <DataGrid x:Name="DataGrid" Grid.Column="0" Grid.Row="1" IsEnabled="{Binding DataGridEnabled}" SelectionMode="Single" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}" HorizontalScrollBarVisibility="Auto"
+                                        SelectedItem="{Binding SelectedItem}" Height="Auto" AutoGenerateColumns="False" CanUserAddRows="False" ColumnWidth="*">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="User ID" Binding="{Binding UserID, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Surname" Binding="{Binding Surname, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Email" Binding="{Binding Email, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Mobile phone" Binding="{Binding MobilePhone, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="Type of user" Binding="{Binding TypeUser, Mode=OneWay}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+
+                    </xcad:LayoutAnchorable>
+                </xcad:LayoutAnchorablePane>
+                <xcad:LayoutAnchorablePane DockWidth="200">
+                    <xcad:LayoutAnchorable ContentId="properties" Title="Controls" CanHide="False" CanClose="False"
+                                            AutoHideWidth="240">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Column="0" Grid.Row="0" IsEnabled="{Binding DialogState, Converter={StaticResource DialogStateToBoolConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="2" Content="First name: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="2" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="3" Content="Last name: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Surname, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="3" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="4" Content="Email: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="4" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="5" Content="Mobile phone: " />
+                                <TextBox Text="{Binding Path=SelectedItem.MobilePhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="5" Width="200"/>
+
+                                <Label Grid.Column="0" Grid.Row="6" Content="Type of user: " />
+                                <ComboBox Grid.Column="1" Grid.Row="6" Width="200" SelectedValue="{Binding Path=SelectedItem.TypeUser, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                          ItemsSource="{Binding Path=UserTypes}" DisplayMemberPath="Name" SelectedValuePath="Value">
+                                </ComboBox>
+                                <Label Grid.Column="0" Grid.Row="7" Content="User ID: " />
+                                <TextBox Text="{Binding Path=SelectedItem.UserID, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="7" Width="200"/>
+                                <Label Grid.Column="0" Grid.Row="8" Content="Password: " />
+                                <TextBox Text="{Binding Path=SelectedItem.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, ValidatesOnExceptions=True}"
+                                        Grid.Column="1" Grid.Row="8" Width="200"/>
+
+                                
+
+
+                            </Grid>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="10">
+                                <Button Grid.Column="0" Grid.Row="1" Content="Create" Command="{Binding AddCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="2" Content="Change" Command="{Binding EditCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="3" Content="Delete" Command="{Binding DeleteCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="4" IsDefault="True" Content="Ok" Command="{Binding OkCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="5" IsCancel="True" Content="Cancel" Command="{Binding CancelCommand}" Margin="10"/>
+                                <Button Grid.Column="0" Grid.Row="6" Content="Back" Command="{Binding BackCommand}" Margin="10"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </xcad:LayoutAnchorable>
+                </xcad:LayoutAnchorablePane>
+
+            </xcad:LayoutPanel>
+        </xcad:LayoutRoot>
+
+
+    </xcad:DockingManager>
+</Window>
