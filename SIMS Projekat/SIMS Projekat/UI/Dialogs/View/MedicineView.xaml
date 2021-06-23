@@ -154,7 +154,7 @@
                                 </StackPanel>
 
                             </StackPanel>
-                            <StackPanel  Orientation="Horizontal" Width="258" Margin="914,-10,185.6,10" >
+                            <StackPanel  Orientation="Horizontal" Width="258" Margin="914,-10,185.6,10" Visibility="{Binding IsUserOrDoctor}">
                                 <ComboBox  Width="112" SelectedValue="{Binding SelectedIngredient, UpdateSourceTrigger=PropertyChanged}"
                                           ItemsSource="{Binding IngredientsCombo}" DisplayMemberPath="Name" SelectedValuePath="Value" Height="30"/>
                                 <TextBox Text="{Binding Quantity}"   Height="30" Width="111"/>

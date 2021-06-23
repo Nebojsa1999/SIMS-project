@@ -185,11 +185,11 @@ namespace SIMS_Projekat.UI.Dialogs.ViewModel
         {
             get
             {
-                return sortIngredientsFrequencyCommand ?? (sortIngredientsFrequencyCommand = new RelayCommand(param => this.SortCommandExecute()));
+                return sortIngredientsFrequencyCommand ?? (sortIngredientsFrequencyCommand = new RelayCommand(param => this.SortCommandMedicineExecute()));
             }
         }
 
-        public void SortCommandExecute()
+        public void SortCommandMedicineExecute()
         {
             Items = new ObservableCollection<Entity>(service.SortByMedicineService());
 

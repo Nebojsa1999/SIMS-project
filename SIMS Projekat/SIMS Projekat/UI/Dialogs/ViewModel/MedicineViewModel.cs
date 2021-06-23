@@ -107,7 +107,7 @@ namespace SIMS_Projekat.UI.Dialogs.ViewModel
         {
             get
             {
-                return searchByPriceCommand ?? (searchByPriceCommand = new RelayCommand(param => this.SearchExecute(), param => this.SearchCanExecute()));
+                return searchByPriceCommand ?? (searchByPriceCommand = new RelayCommand(param => this.SearchPriceExecute(), param => this.SearchPriceCanExecute()));
             }
         }
         public RelayCommand SearchByIngredient
@@ -450,6 +450,8 @@ namespace SIMS_Projekat.UI.Dialogs.ViewModel
         }
 
 
+
+
         public ObservableCollection<TableData> MedicamentIngredient 
         {
             get 
@@ -502,7 +504,7 @@ namespace SIMS_Projekat.UI.Dialogs.ViewModel
             }
         }
 
-        public void SearchExecute()
+        public void SearchPriceExecute()
         {
             if (ModelContext.Instance.User.TypeUser == EnumTypeOfUser.Pharmacist)
             {
@@ -523,7 +525,7 @@ namespace SIMS_Projekat.UI.Dialogs.ViewModel
             }
         }
 
-        public bool SearchCanExecute()
+        public bool SearchPriceCanExecute()
         {
             return priceTo != priceFrom && priceTo > priceFrom;
         }
